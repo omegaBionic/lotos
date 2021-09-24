@@ -1,0 +1,43 @@
+ {composition du processus 1 avec processus 2 avec la synchro en b}
+ System exercice1[a, b, c, d] := 
+  processus1[a, b, c, d] | [b] | processus2[a, b, c, d]
+ 
+ where
+    {processus 1}
+    process processus1[a, b, c, d] :=
+    c; d; exit
+    [] a;b; processus1[a,b,c,d]
+    endproc
+    
+   {processus 2}
+   process processus2[a, b, c, d] :=
+    a; b; boucle[c, d] 
+     where 
+      process boucle[c,d] :=
+        c; d; boucle[c,d]
+      endproc
+    endproc
+    
+endsys
+
+
+{processus 1}
+{System exercice1[a, b, c, d] := 
+ processus1[a, b, c, d]
+ where
+   process processus1[a, b, c, d] :=
+    c; d; exit
+    [] a;b; processus1[a,b,c,d]
+    endproc
+endsys}
+
+{processus 2}
+{System exercice1[a, b, c, d] := 
+   process processus2[a, b, c, d] :=
+    a; b; boucle[c, d] 
+     where 
+      process boucle[c,d] :=
+        c; d; boucle[c,d]
+      endproc
+    endproc
+ endsys}
